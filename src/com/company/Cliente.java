@@ -59,7 +59,7 @@ public class Cliente {
 
         if(obj instanceof Cliente) {
             Cliente cliente = (Cliente) obj;
-            resultado = (this.dni==cliente.dni);
+            resultado = (this.dni.equals(cliente.dni));
         }
         return resultado;
     }
