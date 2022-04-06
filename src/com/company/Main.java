@@ -59,6 +59,17 @@ public class Main {
 
         System.out.println(prueba);
 
+        ArrayList<Cliente>eljoaqui = new ArrayList<>();
+        eljoaqui.add(Marta);
+        eljoaqui.add(Salva);
+        eljoaqui.add(Lydia);
+
+        Collections.sort(eljoaqui);
+
+        System.out.println(eljoaqui);
+
+
+        Collections.binarySearch(eljoaqui,new Cliente("salva"));
 
     }
 }
