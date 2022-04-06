@@ -2,7 +2,7 @@ package com.company;
 
 import java.util.Objects;
 
-public class Cliente {
+public class Cliente implements Comparable {
 
     private String nombre;
     private String dni;
@@ -65,7 +65,18 @@ public class Cliente {
     }
 
 
+
     public String toString(){
         return nombre + " " + " " +dni + " " + edad;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        int resultado = 0;
+       if (o instanceof Cliente){
+           Cliente cliente = (Cliente) o;
+           resultado =this.nombre.compareTo(cliente.getNombre());
+       }
+       return resultado;
     }
 }
