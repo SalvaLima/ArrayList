@@ -1,5 +1,7 @@
 package com.company;
 
+import com.sun.source.tree.Tree;
+
 import java.util.*;
 
 public class Main {
@@ -8,9 +10,10 @@ public class Main {
 
         ArrayList<Cliente> clientes = new ArrayList<>();
         Cliente Lydia = new Cliente();
-        Cliente Salva = new Cliente("Salva", "20091571J", 19);
-        Cliente Marta = new Cliente("Marta", "4712042L", 18);
-        Cliente Pablo = new Cliente("20097421K");
+        Cliente Salva = new Cliente("Salva", "20091571J", 19, 1);
+        Cliente Marta = new Cliente("Marta", "4712042L", 18, 2);
+        Cliente Pablo = new Cliente("Pablo", "20841516K", 20, 3);
+        Cliente Diego = new Cliente("Diego", "30094821S", 22, 4);
         clientes.add(Lydia);
         clientes.add(Salva);
         clientes.add(Marta);
@@ -27,7 +30,7 @@ public class Main {
 
         System.out.println(clientes.contains(new Cliente()));
 
-        System.out.println(clientes.contains(new Cliente("Salva", "20091572J", 19)));
+        System.out.println(clientes.contains(new Cliente("Salva", "20091572J", 19, 12)));
 
         System.out.println(clientes.contains(new Cliente("20097421K")));
 
@@ -71,9 +74,9 @@ public class Main {
         }
 
         TreeSet<Cliente> arbolCliente = new TreeSet<>();
-        arbolCliente.add(new Cliente("Salva", "20091571J", 18));
-        arbolCliente.add(new Cliente("Pablo", "2009iaosht", 20));
-        arbolCliente.add(new Cliente("Chema", "2009asofaopj", 21));
+        arbolCliente.add(new Cliente("Salva", "20091571J", 18, 1));
+        arbolCliente.add(new Cliente("Pablo", "2009iaosht", 20, 2));
+        arbolCliente.add(new Cliente("Chema", "2009asofaopj", 21, 3));
 
         System.out.println(arbolCliente.toString());
 
@@ -93,6 +96,19 @@ public class Main {
 
         System.out.println(fusion(lista1, lista2));
 
+        ArrayList<Cliente> listaClientes1 = new ArrayList<>();
+        listaClientes1.add(Salva);
+        listaClientes1.add(Pablo);
+
+        ArrayList<Cliente> listaClientes2 = new ArrayList<>();
+        listaClientes2.add(Marta);
+        listaClientes2.add(Diego);
+
+        System.out.println(nuevaFusion(listaClientes1, listaClientes2));
+
+        ArrayList<Integer> numRandom = new ArrayList<>();
+
+        System.out.println(listaAleatoria(numRandom));
 
     }
 
@@ -100,24 +116,110 @@ public class Main {
 
         List<Integer> fusionAux = new ArrayList<Integer>();
 
-        int auxJ = 0;
-        int auxI = 0;
+        int auxLista1 = 0;
 
-        for (int i = 0; i < lista1.size(); i++) {
-            for (int j = 0; j < lista2.size(); j++) {
-                if (lista1.get(i) > lista2.get(j)) {
-                    auxJ =(lista2.get(j));
-                }
-                else {
-                    auxI = lista1.get(i);
-                }
-            }
-            if (auxJ < auxI){
-                fusionAux.add(auxJ);
-                fusionAux.add(auxI);
-            }
+        int auxLista2 = 0;
 
+        do {
+            if (lista1.get(auxLista1) < lista2.get(auxLista2)) {
+                fusionAux.add(lista1.get(auxLista1));
+                auxLista1++;
+            } else {
+                fusionAux.add(lista2.get(auxLista2));
+                auxLista2++;
+            }
+        } while (auxLista1 < lista1.size() && auxLista2 < lista2.size());
+
+        if (auxLista1 == lista1.size()) {
+            fusionAux.addAll(lista2.subList(auxLista2, lista2.size()));
+        } else {
+            fusionAux.addAll(lista1.subList(auxLista1, lista1.size()));
         }
         return fusionAux;
     }
+
+    public static List<Cliente> nuevaFusion(List<Cliente> lista1, List<Cliente> lista2) {
+
+        List<Cliente> fusionAux = new ArrayList<>();
+
+        int auxLista1 = 0;
+        int auxLista2 = 0;
+
+        int resultado;
+
+        do {
+            resultado = lista1.get(auxLista1).compareTo(lista2.get((auxLista1)));
+
+            if (resultado < 0) {
+                fusionAux.add(lista1.get(auxLista1));
+                auxLista1++;
+            } else {
+                fusionAux.add(lista2.get(auxLista2));
+                auxLista2++;
+            }
+
+        } while (lista1.size() > auxLista1 && lista2.size() > auxLista2);
+
+        if (lista1.size() == auxLista1) {
+            fusionAux.addAll(lista2.subList(auxLista2, lista2.size()));
+        } else {
+            fusionAux.addAll(lista1.subList(auxLista1, lista1.size()));
+        }
+        return fusionAux;
+    }
+
+    public static List<Integer> listaAleatoria(List<Integer> lista) {
+
+        for (int i = 0; i < 20; i++) {
+            int num = (int) ((Math.random() * 100));
+            if (!lista.contains(num)) {
+                if (lista.size() == 0) {
+                    lista.add(num);
+                }
+                else{
+                    for (int j = 0; j < lista.size(); j++) {
+                        if (lista.get(j) > num) {
+                            lista.add(j, num);
+                            j = lista.size()-1;
+                        }
+                        else {
+                            if (j == lista.size()-1){
+                                lista.add(num);
+                                j = lista.size()-1;
+                            }
+                        }
+                    }
+                }
+            } else {
+                i--;
+            }
+        }
+        return lista;
+    }
+
+        /*
+        int aux;
+
+        for (int i = 0; i < 20; i++) {
+            int num = (int) ((Math.random() * 100));
+            if (!lista.contains(num)){
+                lista.add(num);
+                for (int j = 0; j < lista.size() - 1; j++) {
+                    if (lista.get(j) > lista.get(j + 1)) {
+                        aux = lista.get(j + 1);
+                        lista.set(j + 1, lista.get(j));
+                        lista.set(j, aux);
+                        j = -1;
+                    }
+                }
+            }
+            else {
+                i--;
+            }
+        }
+        return lista;
+    }
+         */
+
+
 }

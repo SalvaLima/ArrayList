@@ -2,17 +2,19 @@ package com.company;
 
 import java.util.Objects;
 
-public class Cliente implements Comparable {
+public class Cliente implements Comparable<Cliente> {
 
     private String nombre;
     private String dni;
     private int edad;
+    private int antiguedad;
 
     public Cliente() {
 
          this.nombre = "Lydia";
          this.dni = "20096321K";
          this.edad = 18;
+         this.antiguedad = 3;
     }
 
     public Cliente(String DNI){
@@ -20,11 +22,12 @@ public class Cliente implements Comparable {
         this.dni = DNI;
     }
 
-    public Cliente(String nombre, String DNI , int edad){
+    public Cliente(String nombre, String DNI , int edad,int antiguedad){
 
         this.nombre = nombre;
         this.dni = DNI;
         this.edad = edad;
+        this.antiguedad = antiguedad;
 
     }
 
@@ -36,20 +39,28 @@ public class Cliente implements Comparable {
         this.nombre = nombre;
     }
 
-    public String getDNI() {
-        return dni;
-    }
-
-    public void setDNI(String DNI) {
-        this.dni = DNI;
-    }
-
     public int getEdad() {
         return edad;
     }
 
     public void setEdad(int edad) {
         this.edad = edad;
+    }
+
+    public String getDni() {
+        return dni;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
+    }
+
+    public int getAntiguedad() {
+        return antiguedad;
+    }
+
+    public void setAntiguedad(int antiguedad) {
+        this.antiguedad = antiguedad;
     }
 
     @Override
@@ -71,12 +82,10 @@ public class Cliente implements Comparable {
     }
 
     @Override
-    public int compareTo(Object o) {
-        int resultado = 0;
-       if (o instanceof Cliente){
-           Cliente cliente = (Cliente) o;
-           resultado =this.nombre.compareTo(cliente.getNombre());
-       }
-       return resultado;
+    public int compareTo(Cliente o) {
+        Integer edad1 = this.antiguedad;
+        Integer edad2 = o.getAntiguedad();
+
+       return edad1.compareTo(edad2);
     }
 }
