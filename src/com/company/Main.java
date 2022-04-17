@@ -101,11 +101,11 @@ public class Main {
         System.out.println(fusion(lista1, lista2));
 
         ArrayList<Cliente> listaClientes1 = new ArrayList<>();
-        listaClientes1.add(Salva);
+        listaClientes1.add(Marta);
         listaClientes1.add(Pablo);
 
         ArrayList<Cliente> listaClientes2 = new ArrayList<>();
-        listaClientes2.add(Marta);
+        listaClientes2.add(Salva);
         listaClientes2.add(Diego);
 
         System.out.println(nuevaFusion(listaClientes1, listaClientes2));
@@ -122,7 +122,7 @@ public class Main {
 
         System.out.println(listaNombre(nombres));
 
-        ArrayList<String> nombres2 = new ArrayList<>();
+        TreeSet<String> nombres2 = new TreeSet<>();
 
         System.out.println(listaNombraOrdenada(nombres2));
 
@@ -164,7 +164,7 @@ public class Main {
         int resultado;
 
         do {
-            resultado = lista1.get(auxLista1).compareTo(lista2.get((auxLista1)));
+            resultado = lista1.get(auxLista1).compareTo(lista2.get((auxLista2)));
 
             if (resultado < 0) {
                 fusionAux.add(lista1.get(auxLista1));
@@ -284,46 +284,18 @@ public class Main {
 
     }
 
-    public static List<String> listaNombraOrdenada(List<String > lista){
+    public static TreeSet<String> listaNombraOrdenada(TreeSet<String > lista){
 
         String nombre;
-        int aux;
 
         System.out.println("Inserte fin para salir del programa");
 
         do {
             System.out.println("Inserte un nombre");
             nombre = scn.next().toUpperCase(Locale.ROOT);
-
-            if (lista.size() == 0 && !nombre.equals("FIN")){
+            if (!nombre.equals("FIN")){
                 lista.add(nombre);
             }
-            else {
-                for (int i = 0; i < lista.size(); i++) {
-                    if (lista.get(i).equals(nombre)){
-                        System.out.println("El nombre es repetido");
-                    }
-                    else {
-                        if (nombre.equals("FIN")){
-                            System.out.println("Ha terminado el programa");
-                            i = lista.size()-1;
-                        }
-                        else {
-                            aux = lista.get(i).compareTo(nombre);
-                            if (aux >= 0 ){
-                                lista.add(nombre);
-                                i = lista.size()-1;
-                            }
-                            else{
-                                lista.add(i,nombre);
-                                i = lista.size()-1;
-                            }
-                        }
-
-                    }
-                }
-            }
-
         }while (!nombre.equals("FIN"));
 
         return lista;

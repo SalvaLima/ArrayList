@@ -78,7 +78,7 @@ public class Cliente implements Comparable<Cliente> {
 
 
     public String toString(){
-        return nombre + " " + " " +dni + " " + edad;
+        return nombre + " " + " " +dni + " " + edad + " " + antiguedad;
     }
 
     @Override
