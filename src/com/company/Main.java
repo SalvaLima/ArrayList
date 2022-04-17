@@ -4,7 +4,11 @@ import com.sun.source.tree.Tree;
 
 import java.util.*;
 
+
+
 public class Main {
+
+    public static Scanner scn = new Scanner(System.in);
 
     public static void main(String[] args) {
 
@@ -110,6 +114,18 @@ public class Main {
 
         System.out.println(listaAleatoria(numRandom));
 
+        ArrayList<Integer> numRandom2 = new ArrayList<>();
+
+        System.out.println(listaAleatoria10(numRandom2));
+
+        ArrayList<String> nombres = new ArrayList<>();
+
+        System.out.println(listaNombre(nombres));
+
+        ArrayList<String> nombres2 = new ArrayList<>();
+
+        System.out.println(listaNombraOrdenada(nombres2));
+
     }
 
     public static List<Integer> fusion(List<Integer> lista1, List<Integer> lista2) {
@@ -173,53 +189,145 @@ public class Main {
         for (int i = 0; i < 20; i++) {
             int num = (int) ((Math.random() * 100));
             if (!lista.contains(num)) {
+
                 if (lista.size() == 0) {
                     lista.add(num);
                 }
-                else{
+
+                else {
                     for (int j = 0; j < lista.size(); j++) {
                         if (lista.get(j) > num) {
                             lista.add(j, num);
-                            j = lista.size()-1;
+                            j = lista.size() - 1;
                         }
                         else {
-                            if (j == lista.size()-1){
+                            if (j == lista.size() - 1) {
                                 lista.add(num);
-                                j = lista.size()-1;
+                                j = lista.size() - 1;
                             }
                         }
                     }
                 }
-            } else {
-                i--;
             }
-        }
-        return lista;
-    }
 
-        /*
-        int aux;
-
-        for (int i = 0; i < 20; i++) {
-            int num = (int) ((Math.random() * 100));
-            if (!lista.contains(num)){
-                lista.add(num);
-                for (int j = 0; j < lista.size() - 1; j++) {
-                    if (lista.get(j) > lista.get(j + 1)) {
-                        aux = lista.get(j + 1);
-                        lista.set(j + 1, lista.get(j));
-                        lista.set(j, aux);
-                        j = -1;
-                    }
-                }
-            }
             else {
                 i--;
             }
         }
         return lista;
     }
-         */
 
+    public static List<Integer> listaAleatoria10(List<Integer> lista){
+
+        for (int i = 0; i < 20; i++) {
+            int num = (int) ((Math.random() * 10));
+
+                if (lista.size() == 0) {
+                    lista.add(num);
+                }
+
+                else {
+                    for (int j = 0; j < lista.size(); j++) {
+                        if (lista.get(j) > num) {
+                            lista.add(j, num);
+                            j = lista.size() - 1;
+                        }
+                        else {
+                            if (j == lista.size() - 1) {
+                                lista.add(num);
+                                j = lista.size() - 1;
+                            }
+                        }
+                    }
+                }
+        }
+        return lista;
+
+    }
+
+    public static List<String> listaNombre(List<String> lista){
+
+        String nombre;
+
+        System.out.println("Inserte fin para salir del programa");
+
+        do {
+            System.out.println("Inserte un nombre");
+            nombre = scn.next().toUpperCase(Locale.ROOT);
+
+            if (lista.size() == 0 && !nombre.equals("FIN")){
+                lista.add(nombre);
+            }
+            else {
+                for (int i = 0; i < lista.size(); i++) {
+                    if (lista.get(i).equals(nombre)){
+                        System.out.println("El nombre es repetido");
+                    }
+
+                    else {
+                        if (nombre.equals("FIN")){
+                            System.out.println("Ha terminado el programa");
+                            i = lista.size()-1;
+                        }
+                        else {
+                            lista.add(nombre);
+                            i = lista.size()-1;
+                        }
+
+                    }
+                }
+            }
+
+        }while (!nombre.equals("FIN"));
+
+        return lista;
+
+    }
+
+    public static List<String> listaNombraOrdenada(List<String > lista){
+
+        String nombre;
+        int aux;
+
+        System.out.println("Inserte fin para salir del programa");
+
+        do {
+            System.out.println("Inserte un nombre");
+            nombre = scn.next().toUpperCase(Locale.ROOT);
+
+            if (lista.size() == 0 && !nombre.equals("FIN")){
+                lista.add(nombre);
+            }
+            else {
+                for (int i = 0; i < lista.size(); i++) {
+                    if (lista.get(i).equals(nombre)){
+                        System.out.println("El nombre es repetido");
+                    }
+                    else {
+                        if (nombre.equals("FIN")){
+                            System.out.println("Ha terminado el programa");
+                            i = lista.size()-1;
+                        }
+                        else {
+                            aux = lista.get(i).compareTo(nombre);
+                            if (aux >= 0 ){
+                                lista.add(nombre);
+                                i = lista.size()-1;
+                            }
+                            else{
+                                lista.add(i,nombre);
+                                i = lista.size()-1;
+                            }
+                        }
+
+                    }
+                }
+            }
+
+        }while (!nombre.equals("FIN"));
+
+        return lista;
+
+    }
 
 }

@@ -85,7 +85,6 @@ public class Cliente implements Comparable<Cliente> {
     public int compareTo(Cliente o) {
         Integer edad1 = this.antiguedad;
         Integer edad2 = o.getAntiguedad();
-
        return edad1.compareTo(edad2);
     }
 }
